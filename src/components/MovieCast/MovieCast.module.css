@@ -1,0 +1,17 @@
+.list {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    list-style: none;
+    text-align: center;
+}
+
+.img {
+    margin-bottom: 6px;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    margin: 0;
+}
