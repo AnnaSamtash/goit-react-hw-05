@@ -1,7 +1,7 @@
 .list {
     padding: 24px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 12px;
     list-style: none;
@@ -14,4 +14,8 @@
     object-fit: cover;
     display: block;
     margin: 0;
+}
+
+.actorName {
+    max-width: 191px;
 }

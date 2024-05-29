@@ -18,7 +18,8 @@ export default function MoviesPage() {
   const handleSubmit = (e, queryText) => {
     e.preventDefault();
     setMovies([]);
-    if (!queryText.trim())
+    if (!queryText.trim()) {
+      setQuery('');
       return toast.error('Please enter the query text', {
         duration: 5000,
         position: 'top-right',
@@ -27,7 +28,9 @@ export default function MoviesPage() {
           backgroundColor: 'white',
         },
       });
-    setSearchParams({ movieName: queryText });
+    }
+    searchParams.set('movieName', queryText);
+    setSearchParams(searchParams);
     setQuery('');
   };
 
@@ -36,7 +39,6 @@ export default function MoviesPage() {
     if (movieName === '') return;
     async function getMovieByQuery() {
       setError(null);
-      setMovies([]);
       setLoading(true);
       try {
         const { results } = await fetchMoviesByQuery(movieName);

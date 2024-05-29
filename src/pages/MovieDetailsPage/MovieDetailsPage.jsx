@@ -14,7 +14,9 @@ export default function MovieDetailsPage() {
 
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = useRef();
+  const backLinkHref = useRef(
+    location.state?.pathname + location.state?.search ?? '/'
+  );
   const defaultImg =
     'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
   const buildLinkClass = ({ isActive }) => {
@@ -32,8 +34,6 @@ export default function MovieDetailsPage() {
           setError('Sorry, page no find!');
         }
         setMovieDetails(data);
-        backLinkHref.current =
-          location.state?.pathname + location.state?.search ?? '/';
       } catch (error) {
         setError('Sorry, page no find!');
       } finally {
@@ -97,7 +97,7 @@ export default function MovieDetailsPage() {
                 </NavLink>
               </li>
             </ul>
-            <Suspense fallback={<div>Loading subpage...</div>}>
+            <Suspense fallback={<div>Loading sub page...</div>}>
               <Outlet />
             </Suspense>
           </div>
