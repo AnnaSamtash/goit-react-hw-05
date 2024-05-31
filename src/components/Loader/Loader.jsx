@@ -5,9 +5,9 @@ export default function Loader() {
   return (
     <div className={css.loader}>
       <Circles
-        height="100"
-        dth="100"
-        color="blue"
+        height="300"
+        dth="300"
+        color="rgb(152, 253, 143"
         ariaLabel="circles-loading"
         wrapperStyle={{}}
         wrapperClass=""

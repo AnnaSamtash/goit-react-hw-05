@@ -15,7 +15,7 @@
 }
 
 .movie_name {
-    font-size: 28px;
+    font-size: 30px;
     margin-bottom: 12px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .title_add {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 600;
     margin-left: 24px;
 }
@@ -46,9 +46,15 @@
 
 .link {
     color: blue;
+    font-size: 22px;
     text-decoration: underline;
+    transition: color 250ms linear;
+}
+
+.link:hover {
+    color: rgb(113, 245, 101);
 }
 
 .active {
-    color: yellow;
+    color: rgb(152, 253, 143);
 }

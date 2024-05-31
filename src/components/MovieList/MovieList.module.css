@@ -1,8 +1,29 @@
 .list {
-    padding-left: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
 }
 
 .list_item {
-    color: blue;
-    text-decoration: underline;
+    flex-basis: calc((100% - 96px) / 5);
+}
+
+.img {
+    object-fit: cover;
+    height: 350px;
+    width: 100%;
+    transition: transform 250ms linear;
+}
+
+.img:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    margin-top: 24px;
+    font-size: 22px;
+    text-align: center;
 }

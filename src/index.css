@@ -5,9 +5,9 @@
   font-weight: 400;
   font-size: 16px;
   text-align: start;
-  color-scheme: light dark;
-  color: black;
-  background-color: white;
+  color-scheme: dark;
+  color: white;
+  background-color: black;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

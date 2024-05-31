@@ -20,11 +20,12 @@ export default function MoviesPage() {
     setMovies([]);
     if (!queryText.trim()) {
       setQuery('');
+      setSearchParams({});
       return toast.error('Please enter the query text', {
         duration: 5000,
         position: 'top-right',
         style: {
-          color: 'red',
+          color: 'black',
           backgroundColor: 'white',
         },
       });

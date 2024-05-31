@@ -5,9 +5,11 @@
 .SearchBar_form {
     background-color: white;
     border: 1px solid gray;
-    width: 290px;
+    width: 450px;
     display: flex;
+    justify-content: space-between;
     padding: 0;
+    margin: 0 auto;
 }
 
 .SearchBar_btn {
@@ -16,12 +18,25 @@
     border-radius: 0;
     background-color: rgb(209, 199, 199);
     text-align: center;
-    padding: 6px;
+    padding: 8px;
     border: none;
+    font-size: 22px;
     line-height: 0;
+    transition: background-color 250ms linear;
+}
+
+.SearchBar_btn:hover {
+    background-color: rgb(113, 245, 101);
 }
 
 .SearchBar_input {
     background-color: white;
+    font-size: 20px;
+    color: #000;
     border: none;
+    padding: 8px;
+}
+
+.SearchBar_input::placeholder {
+    font-size: 20px;
 }

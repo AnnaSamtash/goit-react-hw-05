@@ -1,5 +1,5 @@
 .header {
-    background-color: blueviolet;
+    background-color: rgba(111, 5, 93, 0.875);
     padding: 24px;
     border-bottom: 4px solid rgb(150, 148, 148);
 }
@@ -17,5 +17,5 @@
 }
 
 .active {
-    color: yellow;
+    color: rgb(152, 253, 143);
 }

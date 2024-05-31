@@ -8,12 +8,13 @@ export default function SearchBar({ value, onChange, handleSubmit }) {
         className={css.SearchBar_form}
       >
         <input
-          className={css.input}
+          className={css.SearchBar_input}
           type="text"
           value={value}
           onChange={onChange}
           autoComplete="off"
           autoFocus
+          placeholder="Search movie..."
         />
         <button className={css.SearchBar_btn} type="submit">
           Search
