@@ -19,6 +19,7 @@ export default function MovieDetailsPage() {
   );
   const defaultImg =
     'https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg';
+
   const buildLinkClass = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
   };
@@ -49,8 +50,9 @@ export default function MovieDetailsPage() {
       {loading && <Loader />}
       {error && !loading && <NotFoundPage>{error}</NotFoundPage>}
       {movieDetails && !loading && (
-        <section>
-          <div className={css.info_wrapper}>
+        <div>
+          <section className={css.info_wrapper}>
+            <h1 className={css.visually_hidden}>Base information</h1>
             <img
               src={
                 movieDetails.poster_path
@@ -82,9 +84,9 @@ export default function MovieDetailsPage() {
                 </p>
               </li>
             </ul>
-          </div>
-          <div className={css.add}>
-            <h3 className={css.title_add}>Additional information</h3>
+          </section>
+          <section className={css.add}>
+            <h1 className={css.title_add}>Additional information</h1>
             <ul className={css.links_list}>
               <li>
                 <NavLink to="cast" className={buildLinkClass}>
@@ -100,8 +102,8 @@ export default function MovieDetailsPage() {
             <Suspense fallback={<div>Loading sub page...</div>}>
               <Outlet />
             </Suspense>
-          </div>
-        </section>
+          </section>
+        </div>
       )}
     </main>
   );
