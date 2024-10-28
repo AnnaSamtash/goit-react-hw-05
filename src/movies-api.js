@@ -10,14 +10,20 @@ const options = {
   },
   params: {
     // api_key: ACCESS_KEY,
-    page: 1,
+    // page: 1,
     include_adult: false,
     language: 'en-US',
   },
 };
 
-export const fetchMovies = async () => {
-  const response = await axios.get(`3/trending/movie/day`, options);
+export const fetchMovies = async page => {
+  const response = await axios.get(`3/trending/movie/day`, {
+    ...options,
+    params: {
+      ...options.params,
+      page,
+    },
+  });
   return response.data;
 };
 
@@ -36,7 +42,14 @@ export const fetchMovieReviewsById = async movieId => {
   return response.data;
 };
 
-export const fetchMoviesByQuery = async query => {
-  const response = await axios.get(`3/search/movie?query=${query}`, options);
+export const fetchMoviesByQuery = async (query, page) => {
+  const response = await axios.get(`3/search/movie`, {
+    ...options,
+    params: {
+      ...options.params,
+      query,
+      page,
+    },
+  });
   return response.data;
 };

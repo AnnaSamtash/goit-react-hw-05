@@ -1,0 +1,29 @@
+.btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid white;
+    background-color: lightgray;
+    color: white;
+    transition: transform 250ms linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.btn:hover,
+.btn:focus {
+    transform: scale(1.1);
+}
+
+
+.isSelected {
+    background-color: rgb(152, 253, 143);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: transparent;
+    color: #666;
+}

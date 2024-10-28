@@ -1,0 +1,31 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.list_item {
+    display: flex;
+}
+
+.img {
+    height: 350px;
+    width: 350px;
+    transition: transform 250ms linear;
+    display: block;
+    margin: 0, auto;
+}
+
+.img:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    margin-left: 24px;
+    font-size: 32px;
+
+}

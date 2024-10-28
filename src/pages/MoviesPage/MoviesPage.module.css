@@ -1,3 +1,8 @@
 .container {
     padding: 24px;
 }
+
+.button_container {
+    display: flex;
+    column-gap: 5px;
+}
