@@ -21,12 +21,16 @@ export default function HomePage() {
     if (inView && currentPage < totalPages) {
       setPage(prevPage => prevPage + 1);
     }
-  }, [inView, currentPage, totalPages]);
+  }, [inView]);
 
   useEffect(() => {
-    (async () => {
+    fetchTrendingMovies();
+  }, []);
+
+  useEffect(() => {
+    if (currentPage > 1) {
       fetchTrendingMovies();
-    })();
+    }
   }, [currentPage]);
 
   async function getMovies() {
@@ -35,8 +39,10 @@ export default function HomePage() {
     if (results.length === 0) {
       throw new Error('Sorry, no movies on this request!');
     }
-    setMovies(prevMovies => [...prevMovies, ...results]);
     setTotalPages(total_pages);
+    currentPage === 1
+      ? setMovies(results)
+      : setMovies(prevMovies => [...prevMovies, ...results]);
   }
 
   return (
