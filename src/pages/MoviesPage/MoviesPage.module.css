@@ -6,3 +6,11 @@
     display: flex;
     column-gap: 5px;
 }
+
+.filters_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 24px;
+}

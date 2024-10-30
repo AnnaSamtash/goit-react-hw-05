@@ -1,7 +1,7 @@
 import css from './MoviesPage.module.css';
 import { useSearchParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { fetchMoviesByQuery } from '../../movies-api';
+import { useEffect, useMemo, useState } from 'react';
+import { fetchMoviesByQuery, fetchSortedMovies } from '../../movies-api';
 import Loader from '../../components/Loader/Loader';
 import MovieListMoviePage from '../../components/MovieListMoviePage/MovieListMoviePage';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -13,11 +13,12 @@ import Button from '../../components/Button/Button';
 import { FaCaretLeft } from 'react-icons/fa';
 import { FaCaretRight } from 'react-icons/fa';
 import ButtonList from '../../components/ButtonList/ButtonList';
+import SelectSortedBar, {
+  filterOptions,
+} from '../../components/SelectSortedBar/SelectSortedBar';
 
 export default function MoviesPage() {
   const [movies, setMovies] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useState('');
   const [totalPages, setTotalPages] = useState(1);
   const [
     currentPage,
@@ -29,18 +30,30 @@ export default function MoviesPage() {
     handleNextRange,
     handlePrevRange,
   ] = usePagination(1, totalPages);
-  const [fetchMovies, loading, error] = useFetching(getMovieByQuery);
+  const [fetchMoviesData, loading, error] = useFetching(getMovie);
+  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedOption, setSelectedOption] = useState(
+    filterOptions[0].options[0]
+  );
+  const { movieName, sortedBy } = useMemo(
+    () => Object.fromEntries([...searchParams]),
+    [searchParams]
+  );
 
   useEffect(() => {
     (async () => {
-      fetchMovies();
+      fetchMoviesData();
     })();
   }, [searchParams, currentPage]);
 
-  async function getMovieByQuery() {
-    const movieName = searchParams.get('movieName') ?? '';
-    if (movieName === '') return;
-    const data = await fetchMoviesByQuery(movieName, currentPage);
+  async function getMovie() {
+    let data;
+    if (movieName) {
+      data = await fetchMoviesByQuery(movieName, currentPage);
+    } else if (sortedBy) {
+      data = await fetchSortedMovies(sortedBy, currentPage);
+    }
     const { total_pages, results } = data;
     if (results.length === 0) {
       throw new Error('Sorry, no movies on this request!');
@@ -53,7 +66,6 @@ export default function MoviesPage() {
     e.preventDefault();
     setMovies([]);
     if (!queryText.trim()) {
-      setQuery('');
       setSearchParams({});
       return toast.error('Please enter the query text', {
         duration: 5000,
@@ -64,23 +76,31 @@ export default function MoviesPage() {
         },
       });
     }
-    searchParams.set('movieName', queryText);
-    setSearchParams(searchParams);
+    setSearchParams({ movieName: queryText });
     setQuery('');
   };
 
+  const handleSelectChange = selectedOption => {
+    setSelectedOption(selectedOption);
+    setSearchParams({ sortedBy: selectedOption.value });
+  };
+
   const displayedButtonList = pagesArray.slice(range.start, range.end);
+
   return (
     <main className={css.container}>
-      <SearchBar
-        value={query}
-        onChange={e => setQuery(e.target.value)}
-        handleSubmit={handleSubmit}
-      />
+      <div className={css.filters_container}>
+        <SearchBar
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          handleSubmit={handleSubmit}
+        />
+        <SelectSortedBar value={selectedOption} onChange={handleSelectChange} />
+      </div>
       {loading && <Loader />}
       {error && !loading && <NotFoundPage>{error}</NotFoundPage>}
       {movies?.length > 0 && !loading && <MovieListMoviePage items={movies} />}
-      {totalPages > 1 && (
+      {movies?.length > 0 && (
         <div className={css.button_container}>
           <Button onClick={prevPage} disabled={currentPage === 1}>
             <FaCaretLeft size="32" />

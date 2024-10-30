@@ -53,3 +53,14 @@ export const fetchMoviesByQuery = async (query, page) => {
   });
   return response.data;
 };
+export const fetchSortedMovies = async (sort_by, page) => {
+  const response = await axios.get(`3/discover/movie?`, {
+    ...options,
+    params: {
+      ...options.params,
+      sort_by,
+      page,
+    },
+  });
+  return response.data;
+};

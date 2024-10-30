@@ -1,12 +1,10 @@
 .SearchBar_form {
     background-color: white;
     border: 1px solid gray;
-    width: 450px;
+    width: 35vw;
     display: flex;
     justify-content: space-between;
     padding: 0;
-    margin: 0 auto;
-    margin-bottom: 24px;
 }
 
 .SearchBar_btn {

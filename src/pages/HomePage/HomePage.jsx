@@ -53,10 +53,7 @@ export default function HomePage() {
       {movies.length > 0 && (
         <>
           <MovieListHomePage items={movies} />
-          <div
-            ref={lastElementRef}
-            style={{ height: 20, background: 'red' }}
-          ></div>
+          <div ref={lastElementRef} style={{ height: 20 }}></div>
         </>
       )}
     </main>
